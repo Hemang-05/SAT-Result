@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React, { useState } from 'react';
+import Menu from './components/Menu';
+import InsertData from './components/InsertData';
+import ViewData from './components/ViewData';
+import GetRank from './components/GetRank';
+import UpdateScore from './components/UpdateScore';
+import DeleteRecord from './components/DeleteRecord';
+
+const App = () => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const renderComponent = () => {
+    switch (selectedOption) {
+      case 'insert':
+        return <InsertData />;
+      case 'view':
+        return <ViewData />;
+      case 'rank':
+        return <GetRank />;
+      case 'update':
+        return <UpdateScore />;
+      case 'delete':
+        return <DeleteRecord />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>SAT Results App</h1>
+      <Menu setSelectedOption={setSelectedOption} />
+      <hr />
+      {renderComponent()}
     </div>
   );
-}
+};
 
 export default App;
